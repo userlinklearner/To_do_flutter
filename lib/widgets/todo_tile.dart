@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:aula2/models/to_do.dart';
+import 'package:to_do_list/models/to_do.dart';
 
 class ToDoTile extends StatefulWidget {
-  const ToDoTile({Key? key}) : super(key: key);
+  const ToDoTile({Key? key,required this.toDo}) : super(key: key);
 
 final ToDo toDo;
   @override
@@ -15,9 +15,9 @@ class _ToDoTileState extends State<ToDoTile> {
     return ListTile(
       title: Text(widget.toDo.title),
       trailing: Checkbox(
-        value: widget.toDo.completed, onChanged: (bool? value) {
+        value: widget.toDo.done, onChanged: (bool? value) {
           setState(() {
-            widget.toDo.completed = value!;
+            widget.toDo.done = value!;
           });
         }),
     );
