@@ -16,28 +16,38 @@ class _HomePageState extends State<HomePage> {
     ToDo(title: 'Walk the dog', done: true),
   ];
 
+  void deleteItem(int index){
+    setState(() {
+      toDos.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('To Do List'),
         actions: [
+          
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () async {
-              final newToDo = (await Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  AddingPage())))as ToDo; //learn about casting
+              final newToDo = (await Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  AddingPage())))as ToDo; 
               setState(() {
                 toDos.add(newToDo);
               });
             },
           ),
-          TextButton(onPressed: (){}, child: Text('Add')),
+     
         ],
       ),
       body: ListView.builder(
         itemCount: toDos.length,
         itemBuilder: (BuildContext context, int index) {
-          return ToDoTile(toDo: toDos[index]);
+          return ToDoTile(toDo: toDos[index],
+           onDelete:(){
+            deleteItem(index);
+          });
         },
       ),
     );
